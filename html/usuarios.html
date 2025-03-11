@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas Finanzas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../css/usuarios.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h1 class="title has-text-white">Sistemas Finanzas</h1>
+        <a href="index.html">🏠 Inicio</a>
+        <a href="usuarios.html">👥 Usuarios y Roles</a>
+        <a href="bancos.html">🏦 Bancos</a>
+        <a href="divisas.html">💱 Divisas</a>
+        <a href="cuentas.html">🏦 Cuentas</a>
+        <a href="categorias.html">📂 Categorías</a>
+        <a href="transacciones.html">💸 Transacciones</a>
+        <a href="presupuestos.html">📊 Presupuestos</a>
+        <a href="ahorros.html">💰 Ahorro</a>
+    </div>
+
+    <div class="dashboard-content">
+        <h2 class="title has-text-white">Gestión de Usuarios y Roles</h2>
+        <button class="button is-primary" onclick="showCrudModal()">Añadir Usuario</button>
+        <table class="table is-fullwidth is-striped is-hoverable mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="userTable">
+                <tr>
+                    <td>1</td>
+                    <td>Juan Pérez</td>
+                    <td>Administrador</td>
+                    <td>
+                        <button class="button is-warning is-small" onclick="editUser(1)">Editar</button>
+                        <button class="button is-danger is-small" onclick="deleteUser(1)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="crudModal" class="modal">
+        <div class="modal-background" onclick="closeCrudModal()"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Añadir/Editar Usuario</p>
+                <button class="delete" aria-label="close" onclick="closeCrudModal()"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="field">
+                    <label class="label">Nombre</label>
+                    <div class="control">
+                        <input class="input" type="text" id="userName" placeholder="Nombre del usuario">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Rol</label>
+                    <div class="control">
+                        <div class="select">
+                            <select id="userRole">
+                                <option value="Administrador">Administrador</option>
+                                <option value="Usuario">Usuario</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success" onclick="saveUser()">Guardar</button>
+                <button class="button" onclick="closeCrudModal()">Cancelar</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../js/usuarios.js"></script>
+</body>
+</html>
