@@ -1,0 +1,65 @@
+body {
+    background-color: #1a0640;
+    color: white;
+    height: 100vh;
+    overflow: hidden;
+}
+.sidebar {
+    background-color: #00204a;
+    padding: 20px;
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar a {
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+}
+.sidebar a:hover {
+    background-color: #004080;
+    border-radius: 5px;
+}
+.dashboard-content {
+    margin-left: 270px;
+    padding: 20px;
+}
+.card-container {
+    display: flex;
+    gap: 15px;
+}
+.card-custom {
+    background: linear-gradient(135deg, #14b8a6, #3b82f6);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+}
+.wallet-card {
+    background: linear-gradient(135deg, #6b21a8, #3b82f6);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+}
+.transaction-card {
+    background-color: #001a33;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    flex: 2;
+}
+.transfer-card {
+    background: linear-gradient(135deg, #14b8a6, #3b82f6);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+}

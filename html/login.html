@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas Finanzas - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="box login-box">
+            <h2 class="title has-text-centered">Iniciar Sesión</h2>
+            <div class="field">
+                <label class="label">Correo Electrónico</label>
+                <div class="control">
+                    <input class="input" type="email" id="email" placeholder="Ingrese su correo">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Contraseña</label>
+                <div class="control">
+                    <input class="input" type="password" id="password" placeholder="Ingrese su contraseña">
+                </div>
+            </div>
+            <div class="field has-text-centered">
+                <button class="button is-primary" onclick="login()">Iniciar Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/login.js"></script>
+</body>
+</html>

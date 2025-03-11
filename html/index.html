@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas Finanzas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h1 class="title has-text-white">Sistemas Finanzas</h1>
+        <a href="index.html">🏠 Inicio</a>
+        <a href="usuarios.html">👥 Usuarios y Roles</a>
+        <a href="bancos.html">🏦 Bancos</a>
+        <a href="divisas.html">💱 Divisas</a>
+        <a href="cuentas.html">🏦 Cuentas</a>
+        <a href="categorias.html">📂 Categorías</a>
+        <a href="transacciones.html">💸 Transacciones</a>
+        <a href="presupuestos.html">📊 Presupuestos</a>
+        <a href="ahorros.html">💰 Ahorro</a>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="card-container">
+            <div class="card-custom">
+                <h2 class="title is-5">Ingresos</h2>
+                <p class="is-size-4">₡ 525.720</p>
+            </div>
+            <div class="card-custom">
+                <h2 class="title is-5">Salidas</h2>
+                <p class="is-size-4">₡ 300.000</p>
+            </div>
+            <div class="card-custom">
+                <h2 class="title is-5">Gastos Principales</h2>
+                <p class="is-size-4">₡ 210.500</p>
+            </div>
+        </div>
+        
+        <div class="card-container" style="margin-top: 15px;">
+            <div class="wallet-card">
+                <h2 class="title is-5">Billetera</h2>
+                <p class="is-size-6">Balance Activo</p>
+                <h3 class="is-size-3">₡ 225.000</h3>
+            </div>
+            <div class="transfer-card">
+                <h2 class="title is-5">Transferencia Rápida</h2>
+                <input class="input" type="text" placeholder="Número de cuenta">
+                <button class="button is-primary is-fullwidth mt-3" onclick="showAlert()">Enviar</button>
+            </div>
+        </div>
+        
+        <div class="card-container" style="margin-top: 15px;">
+            <div class="transaction-card">
+                <h2 class="title is-5">Transacciones</h2>
+                <p>⚡ Electricidad - 28 de Agosto - ₡ 80.210</p>
+                <p>🛒 Mercado - 12 de Agosto - ₡ 100.520</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/index.js"></script>
+</body>
+</html>
