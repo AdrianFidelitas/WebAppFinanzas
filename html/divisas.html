@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas Finanzas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../css/divisas.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h1 class="title has-text-white">Sistemas Finanzas</h1>
+        <a href="index.html">🏠 Inicio</a>
+        <a href="usuarios.html">👥 Usuarios y Roles</a>
+        <a href="bancos.html">🏦 Bancos</a>
+        <a href="divisas.html">💱 Divisas</a>
+        <a href="cuentas.html">🏦 Cuentas</a>
+        <a href="categorias.html">📂 Categorías</a>
+        <a href="transacciones.html">💸 Transacciones</a>
+        <a href="presupuestos.html">📊 Presupuestos</a>
+        <a href="ahorros.html">💰 Ahorro</a>
+    </div>
+
+    <div class="dashboard-content">
+        <h2 class="title has-text-white">Gestión de Divisas</h2>
+        <button class="button is-primary" onclick="showCurrencyModal()">Añadir Divisa</button>
+        <table class="table is-fullwidth is-striped is-hoverable mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre de la Divisa</th>
+                    <th>Símbolo</th>
+                    <th>Valor en USD</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="currencyTable">
+                <tr>
+                    <td>1</td>
+                    <td>Euro</td>
+                    <td>€</td>
+                    <td>1.10</td>
+                    <td>
+                        <button class="button is-warning is-small" onclick="editCurrency(1)">Editar</button>
+                        <button class="button is-danger is-small" onclick="deleteCurrency(1)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="currencyModal" class="modal">
+        <div class="modal-background" onclick="closeCurrencyModal()"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Añadir/Editar Divisa</p>
+                <button class="delete" aria-label="close" onclick="closeCurrencyModal()"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="field">
+                    <label class="label">Nombre de la Divisa</label>
+                    <div class="control">
+                        <input class="input" type="text" id="currencyName" placeholder="Nombre de la divisa">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Símbolo</label>
+                    <div class="control">
+                        <input class="input" type="text" id="currencySymbol" placeholder="Símbolo de la divisa">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Valor en USD</label>
+                    <div class="control">
+                        <input class="input" type="number" step="0.01" id="currencyValue" placeholder="Valor en dólares">
+                    </div>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success" onclick="saveCurrency()">Guardar</button>
+                <button class="button" onclick="closeCurrencyModal()">Cancelar</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../js/divisas.js"></script>
+</body>
+</html>
