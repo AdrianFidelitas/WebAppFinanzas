@@ -1,6 +1,6 @@
 <?php
 
     const DB_SERVER="mysql.customcodecr.com";
-    const DB_NAME="finanzas";
-    const DB_USER="";
-    const DB_PASSWORD="";
+    const DB_NAME="FinancialAppDB";
+    const DB_USER="user_finapp";
+    const DB_PASSWORD="5rB5pVGrGD";
