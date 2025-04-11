@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/* Evita la barra de desplazamiento innecesaria */
+html, body {
+    overflow-x: hidden; /* Evita desplazamiento horizontal */
+    overflow-y: auto; /* Solo permite desplazamiento si es necesario */
+    height: 100vh; /* Asegura que ocupe toda la pantalla */
+}
+
+/* Aseguramos que el contenido principal respete el sidebar */
+.dashboard-content {
+    flex: 1;
+    padding: 30px;
+    margin-left: 270px; /* Ajuste para dejar espacio al sidebar */
+    overflow-y: auto;
+    background-color: #1e1e2f;
+    color: #ffffff; 
+    max-height: 100vh; 
+}
+
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1e1e2f;
+    color: #ffffff;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 250px; /* Ajusta el ancho según necesites */
+    background-color: #151521;
+    padding: 20px;
+    height: 100vh;
+    position: fixed; /* Fija el sidebar a la izquierda */
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.sidebar h2 {
+    color: #00aaff;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #ccc;
+    background-color: #26263a;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #2e2e48;
+    color: #fff;
+}
+
+
+.chart-container {
+    background-color: #26263a;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+table {
+    background-color: #26263a;
+    color: #fff;
+}
+
+table td, table th {
+    padding: 12px;
+    border-bottom: 1px solid #444;
+    font-size: 15px;
+}
+
+.modal-card {
+    background-color: #2e2e48;
+    color: #000;
+}
+
+.modal-card-head,
+.modal-card-foot {
+    background-color: #00aaff;
+    border-color: #0000;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .dashboard-content {
+        margin-left: 0;
+    }
+}
