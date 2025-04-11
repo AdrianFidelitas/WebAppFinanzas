@@ -56,10 +56,24 @@
                         <input class="input" type="text" id="budgetName" placeholder="Ej: Presupuesto de Ahorro">
                     </div>
                 </div>
+                
+                <div class="field">
+                    <label class="label">Moneda</label>
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select id="savingCurrency">
+                                <option value="">Seleccionar moneda</option>
+                                <option value="USD">$ - Dólares (USD)</option>
+                                <option value="CRC">₡ - Colones (CRC)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="field">
                     <label class="label">Monto Total</label>
                     <div class="control">
-                        <input class="input" type="number" id="budgetAmount" placeholder="Monto en USD">
+                        <input class="input" type="number" id="budgetAmount" placeholder="Monto">
                     </div>
                 </div>
             </section>

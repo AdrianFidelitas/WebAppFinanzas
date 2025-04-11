@@ -19,7 +19,7 @@ function showAccountModal() {
     const newRow = `<tr>
       <td>${name}</td>
       <td>${type.charAt(0).toUpperCase() + type.slice(1)}</td>
-      <td>$${parseFloat(balance).toLocaleString()}</td>
+      <td>${parseFloat(balance).toLocaleString()}</td>
       <td>
         <button class='button is-info is-small'  >Editar</button>
         <button class='button is-danger is-small'  >Eliminar</button>

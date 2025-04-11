@@ -52,9 +52,22 @@
                     </div>
                 </div>
                 <div class="field">
+                    <label class="label">Moneda</label>
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select id="savingCurrency">
+                                <option value="">Seleccionar moneda</option>
+                                <option value="USD">$ - Dólares (USD)</option>
+                                <option value="CRC">₡ - Colones (CRC)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
                     <label class="label">Monto Meta</label>
                     <div class="control">
-                        <input class="input" type="number" id="savingGoal" placeholder="Monto en USD">
+                        <input class="input" type="number" id="savingGoal" placeholder="Monto Meta">
                     </div>
                 </div>
                 <div class="field">
