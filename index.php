@@ -26,8 +26,10 @@
             require_once "./app/views/content/".$view."-view.php";
         }
         else{
-            require_once "./app/views/inc/navbar.php";
+            echo '<div class="container">';
+            require_once "./app/views/inc/sidebar.php";
             require_once $view;
+            echo '</div>';
         }
 
         require_once "./app/views/inc/script.php";

@@ -3,7 +3,7 @@ namespace app\controllers;
 
 use app\models\mainModel;
 
-class transactionsController extends mainModel {
+class budgetsController extends mainModel {
 
     public function getTransactionsByUser() {
         $userId = 1; // Reemplazar por $_SESSION['id'] en producción
