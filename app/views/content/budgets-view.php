@@ -2,95 +2,131 @@
 use app\controllers\budgetsController;
 
 $controller = new budgetsController();
-$cuentas = $controller->getAccounts(); // Asegúrate que esta función devuelva un array de cuentas
+$controller->distribuirPresupuesto(); // Recalcula presupuestos según ingresos del mes pasado
+
+$presupuestos = $controller->getBudgetsByUser();
+
+$compra = $controller->getTipoCambioCompra();
+$venta  = $controller->getTipoCambioVenta();
+
+$labels = [];
+$balancesCRC = [];
+$balancesUSD = [];
+
+foreach ($presupuestos as $p) {
+    $label = $p['Category'];
+    $balance = (float)$p['Balance'];
+    $currency = $p['Currency'] ?? 'CRC';
+
+    $labels[] = $label;
+
+    if ($currency === 'USD') {
+        $balancesUSD[] = $balance;
+        $balancesCRC[] = $compra > 0 ? $balance * $compra : $balance;
+    } else {
+        $balancesCRC[] = $balance;
+        $balancesUSD[] = $venta > 0 ? $balance / $venta : $balance;
+    }
+}
+
+$labelsJs = json_encode($labels);
+$balancesCRCJs = json_encode($balancesCRC);
+$balancesUSDJs = json_encode($balancesUSD);
 ?>
 
 <div class="dashboard-content">
-            <h2 class="title has-text-white">Gestión de Presupuestos</h2>
-            <button class="button is-primary" onclick="showBudgetModal()">Crear Presupuesto</button>
-            <button class="button is-warning" onclick="showAdminBudgetModal()">Presupuesto del Administrador</button>
-            
-            <div class="chart-container mt-5">
-                <canvas id="budgetChart"></canvas>
+    <h2 class="title has-text-white">Presupuesto Mensual</h2>
+
+    <div class="field mt-4" style="max-width: 250px; margin: auto;">
+        <label class="label has-text-white">Ver en:</label>
+        <div class="control">
+            <div class="select is-fullwidth">
+                <select id="currencySelect">
+                    <option value="CRC">Colones (₡)</option>
+                    <option value="USD">Dólares ($)</option>
+                </select>
             </div>
-
-            <h3 class="title is-4 has-text-white mt-5">Mis Presupuestos</h3>
-            <table class="table is-fullwidth is-striped is-hoverable mt-3">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Monto Total</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="budgetTable"></tbody>
-            </table>
-        </div>
-
-<!-- Modal para crear presupuesto -->
-    <div id="budgetModal" class="modal">
-        <div class="modal-background" onclick="closeBudgetModal()"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">Crear Presupuesto</p>
-                <button class="delete" aria-label="close" onclick="closeBudgetModal()"></button>
-            </header>
-            <section class="modal-card-body">
-                <div class="field">
-                    <label class="label">Nombre del Presupuesto</label>
-                    <div class="control">
-                        <input class="input" type="text" id="budgetName" placeholder="Ej: Presupuesto de Ahorro">
-                    </div>
-                </div>
-                
-                <div class="field">
-                    <label class="label">Moneda</label>
-                    <div class="control">
-                        <div class="select is-fullwidth">
-                            <select id="savingCurrency">
-                                <option value="">Seleccionar moneda</option>
-                                <option value="USD">$ - Dólares (USD)</option>
-                                <option value="CRC">₡ - Colones (CRC)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Monto Total</label>
-                    <div class="control">
-                        <input class="input" type="number" id="budgetAmount" placeholder="Monto">
-                    </div>
-                </div>
-            </section>
-            <footer class="modal-card-foot">
-                <button class="button is-success" onclick="saveBudget()">Guardar</button>
-                <button class="button" onclick="closeBudgetModal()">Cancelar</button>
-            </footer>
         </div>
     </div>
 
-    <!-- Modal para presupuestos del administrador -->
-    <div id="adminBudgetModal" class="modal">
-        <div class="modal-background" onclick="closeAdminBudgetModal()"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">Presupuesto Sugerido por el Administrador</p>
-                <button class="delete" aria-label="close" onclick="closeAdminBudgetModal()"></button>
-            </header>
-            <section class="modal-card-body">
-                <p>El administrador sugiere el siguiente presupuesto basado en su actividad financiera:</p>
-                <ul>
-                    <li>🏠 Vivienda: $500</li>
-                    <li>🍽 Alimentación: $300</li>
-                    <li>🚗 Transporte: $200</li>
-                    <li>💰 Ahorro: $150</li>
-                </ul>
-            </section>
-            <footer class="modal-card-foot">
-                <button class="button is-success" onclick="acceptAdminBudget()">Aceptar</button>
-                <button class="button" onclick="closeAdminBudgetModal()">Cancelar</button>
-            </footer>
-        </div>
+    <div class="chart-container mt-5" style="max-width: 500px; margin: auto;">
+        <canvas id="budgetChart" height="300"></canvas>
     </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const labels = <?= $labelsJs ?>;
+const balances = {
+    CRC: <?= $balancesCRCJs ?>,
+    USD: <?= $balancesUSDJs ?>
+};
+
+const colores = [
+    'rgba(54, 162, 235, 0.6)',
+    'rgba(255, 206, 86, 0.6)',
+    'rgba(75, 192, 192, 0.6)',
+    'rgba(153, 102, 255, 0.6)',
+    'rgba(255, 159, 64, 0.6)',
+    'rgba(255, 99, 132, 0.6)'
+];
+const bordes = colores.map(c => c.replace('0.6', '1'));
+
+function renderChart(moneda = 'CRC') {
+    const canvas = document.getElementById('budgetChart');
+    const ctx = canvas.getContext('2d');
+
+    // ✅ Destruir instancia previa si existe (sin usar variables globales)
+    const existingChart = Chart.getChart(canvas);
+    if (existingChart) {
+        existingChart.destroy();
+    }
+
+    const data = balances[moneda] || [];
+    const simbolo = moneda === 'USD' ? '$' : '₡';
+    const total = data.reduce((a, b) => a + b, 0);
+
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: `Presupuesto (${moneda})`,
+                data: data,
+                backgroundColor: colores,
+                borderColor: bordes,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            const value = context.parsed;
+                            const porcentaje = total > 0 ? ((value / total) * 100).toFixed(2) : 0;
+                            return `${context.label}: ${simbolo}${value.toLocaleString(undefined, { minimumFractionDigits: 2 })} (${porcentaje}%)`;
+                        }
+                    }
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const currencySelect = document.getElementById('currencySelect');
+
+    currencySelect.addEventListener('change', () => {
+        renderChart(currencySelect.value);
+    });
+
+    renderChart(currencySelect.value); // inicial
+});
+</script>
